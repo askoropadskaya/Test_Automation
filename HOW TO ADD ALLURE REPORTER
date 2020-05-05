@@ -1,0 +1,24 @@
+
+HOW TO ADD ALLURE REPORTER TO EXISTING WDIO FRAMEWORK:
+Install Allure Reporter 
+npm install @wdio/allure-reporter --save-dev
+
+Add Allure to reporters in wdio.config.js file:
+
+  reporters: ['spec', ['allure', {
+    outputDir: 'allure-results',
+    disableWebdriverStepsReporting: false,
+    disableWebdriverScreenshotsReporting: true,
+  }]],
+  
+3. Install CLI (интерфейс командной строки) for Allure 
+
+npm install allure-commandline --save-dev
+
+4. Modify your package.json file, so Allure Report generates and opens automatically after each test run. To do that you need to add allure generate allure-results --clean && allure open to existing scripts. For example:
+  
+  "scripts": {
+    "test": "wdio wdio.conf.js && allure generate allure-results --clean && allure open",
+  },
+  
+Now each time you execute npm test command, Allure Reports will be generated and run on a local server.
